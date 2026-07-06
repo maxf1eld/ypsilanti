@@ -1,0 +1,36 @@
+name: ypsilanti
+description: Build a static site with the ypsilanti static site generator.
+branding:
+  icon: file-text
+  color: purple
+
+inputs:
+  source:
+    description: Path to the site source directory (holds content/, layouts/, static/, config).
+    required: false
+    default: ./site
+  output:
+    description: Directory to write the built site to.
+    required: false
+    default: ./_site
+  zig-version:
+    description: Zig version used to build ypsilanti.
+    required: false
+    default: 0.14.1
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Zig
+      uses: mlugg/setup-zig@v2
+      with:
+        version: ${{ inputs.zig-version }}
+
+    - name: Build ypsilanti
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: zig build -Doptimize=ReleaseFast
+
+    - name: Build site
+      shell: bash
+      run: '"${{ github.action_path }}/zig-out/bin/ypsilanti" build "${{ inputs.source }}" "${{ inputs.output }}"'

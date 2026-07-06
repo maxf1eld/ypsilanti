@@ -1,0 +1,48 @@
+# Deploy a ypsilanti site to GitHub Pages.
+#
+# Copy this file into your SITE repository as .github/workflows/pages.yml,
+# then enable Pages (Settings → Pages → Source: GitHub Actions).
+#
+# Assumes your site source lives in ./site. Change `source:` if it differs.
+#
+# Note: internal links are root-relative (e.g. /about/), so serve at a root
+# domain — a user/org page (you.github.io) or a custom domain. A project page
+# (you.github.io/repo/) serves under a subpath and will break those links.
+
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxf1eld/ypsilanti@main # pin to a tag or commit SHA for stability
+        with:
+          source: ./site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

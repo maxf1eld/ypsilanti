@@ -1,0 +1,6 @@
+title: Example Site
+url: https://example.com
+author: Example Author
+description: A small ypsilanti demo site.
+theme: default
+nav: home=/, about=/about/, posts=/posts/, tags=/tags/, rss=/feed.xml

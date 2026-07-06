@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{description}}">
+  <meta name="author" content="{{author}}">
+  <meta property="og:title" content="{{title}} - {{site_title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{permalink}}">
+  <title>{{title}} - {{site_title}}</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml">
+</head>
+<body>
+  <div class="page">
+    {{> nav}}
+    <main>
+      <h1>{{title}}</h1>
+      <p class="post-date">posted {{date}}</p>
+      {{{content}}}
+    </main>
+    {{> footer}}
+  </div>
+</body>
+</html>

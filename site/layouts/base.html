@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{description}}">
+  <meta name="author" content="{{author}}">
+  <meta property="og:title" content="{{title}} - {{site_title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{permalink}}">
+  <title>{{title}} - {{site_title}}</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="theme-{{theme}}">
+  <div class="page">
+    {{> nav}}
+    <main>
+      {{{content}}}
+    </main>
+    {{> footer}}
+  </div>
+</body>
+</html>
